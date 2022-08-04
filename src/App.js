@@ -18,7 +18,6 @@ function App() {
                 <input type="number" className="form-control" min={1} max={10} placeholder="" aria-label="Rows" aria-describedby="basic-addon1" />
               </div>
             </div>
-
             <div className='col-5 p-0'>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Cols</span>
@@ -27,7 +26,7 @@ function App() {
             </div>
           </div>
 
-          <div className='gap-3 justify-content-center row'>
+          <div className='gap-3 justify-content-center row pb-3'>
             <div className='col-5 p-0'>
               <div className="btn-group float-start w-100" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" name="Algo" id="Algo1" autoComplete="off" defaultChecked/>
@@ -37,9 +36,8 @@ function App() {
                 <label className="btn btn-outline-primary" htmlFor="Algo2">BFS</label>           
               </div>
             </div>
-
-            <div className='col-5 p-0 pb-3'>
-                <div className="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
+            <div className='col-5 p-0'>
+                <div className="btn-group float-start w-100" role="group" aria-label="Basic radio toggle button group">
                   <input type="radio" className="btn-check" name="RunSpeed" id="RunSpeed1" autoComplete="off" defaultChecked/>
                   <label className="btn btn-outline-primary" htmlFor="RunSpeed1">1x</label>
 
@@ -47,7 +45,7 @@ function App() {
                   <label className="btn btn-outline-primary" htmlFor="RunSpeed2">2x</label>     
 
                   <input type="radio" className="btn-check" name="RunSpeed" id="RunSpeed3" autoComplete="off" />
-                  <label className="btn btn-outline-primary" htmlFor="RunSpeed3">4x</label>      
+                  <label className="btn btn-outline-primary" htmlFor="RunSpeed3">4x</label>    
                 </div>
             </div>
           </div>
@@ -62,8 +60,7 @@ function App() {
                   </svg>
                   <span className='mx-1'></span>Random</button>
               </div>
-            </div>  
-
+            </div>
             <div className='col-5 p-0'>
               <div className="input-group mb-3">
                 <button className="btn btn-success w-100">
