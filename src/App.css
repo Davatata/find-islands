@@ -29,3 +29,12 @@
   font-size: 0.875em;
   color: #dc3545;
 }
+
+#islandGrid td {
+  
+}
+
+#islandGrid td:hover {
+  cursor: pointer;
+  background-color: #ffc10775;
+}

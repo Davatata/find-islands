@@ -9,6 +9,8 @@ function App() {
   const [speed, setSpeed] = useState(1);
   const [badRows, setBadRows] = useState(true);
   const [badCols, setBadCols] = useState(true);
+  const [finalGrid, setFinalGrid] = useState([]);
+  
 
   useEffect(() => {
 
@@ -26,6 +28,8 @@ function App() {
   const colsMax = 10;
   const baseSpeed = 200;
 
+  let grid = [];
+
   const Algos = Object.freeze({
     DFS:   "DFS",
     BFS:   "BFS",
@@ -39,12 +43,12 @@ function App() {
 
   function handleRowsChange(ev) {
     console.log("rows changed", ev.target.value);
-    checkRowColValidity();
+    checkRowColValidity();    
   }
 
   function handleColsChange(ev) {
     console.log("cols changed", ev.target.value);
-    checkRowColValidity();
+    checkRowColValidity();    
   }
 
   function checkRowColValidity() {
@@ -57,8 +61,10 @@ function App() {
     var rowsValue = +document.getElementById("RowsInput").value;
     if (rowsValue > 0 && rowsValue <= rowsMax) {
       setBadRows(false);
+      setRows(rowsValue);
     } else {
       setBadRows(true);
+      setFinalGrid([]);
     }
   }
 
@@ -66,8 +72,10 @@ function App() {
     var colsValue = +document.getElementById("ColsInput").value;
     if (colsValue > 0 && colsValue <= colsMax) {
       setBadCols(false);
+      setCols(colsValue);
     } else {
       setBadCols(true);
+      setFinalGrid([]);
     }
   }
 
@@ -84,11 +92,51 @@ function App() {
   }
 
   function run() {
-    console.log("start run");    
+    console.log("run traversal");
   }
   
   function randomize() {
     console.log("start randomize");
+
+    for (var i = 0; i < rows; i++) {
+      grid[i] = [];
+      for (var j = 0; j < cols; j++) {
+        grid[i].push(Math.round(Math.random() * 1));
+      }
+    }
+
+    setup();
+  }
+
+  function setup() {
+    var finalGridTemp = [];
+
+    if (grid.length === 0) {
+      console.log("grid is empty");
+      for (var i = 0; i < rows; i++) {
+        grid[i] = [];
+        for (var j = 0; j < cols; j++) {
+          grid[i].push(0);
+        }
+      }
+    }
+
+    for(const [row, value] of grid.entries()) {
+      var tempRow = [];
+
+      for(const [col, v] of value.entries()) {
+        tempRow.push(<td className='gridCell' onClick={() => toggleCell(row,col,v)} key={row+","+col}>{v}</td>);
+      }
+
+      finalGridTemp.push(<tr>{tempRow}</tr>);
+    }
+
+    setFinalGrid(finalGridTemp);
+  }
+
+  function toggleCell(row,col,v) {
+    grid[row][col] = v === 0 ? 1 : 0;
+    setup();
   }
 
   return (
@@ -119,7 +167,7 @@ function App() {
                 <input id="ColsInput" type="number" className="form-control" min={1} max={10} placeholder="1-10" 
                   aria-label="Cols" aria-describedby="Cols" onChange={handleColsChange}/>
                   { badCols &&
-                    <div className="bad-input-text  fs-6 fst-italic" >
+                    <div className="bad-input-text fs-6 fst-italic" >
                       Must be 1-10
                     </div>
                   }
@@ -157,7 +205,7 @@ function App() {
           <div className='gap-3 justify-content-center row'>
             <div className='col-5 p-0'>
               <div className="input-group mb-3 float-end">
-                <button className="btn btn-secondary w-100" onClick={randomize}>
+                <button className="btn btn-outline-warning w-100" onClick={randomize} disabled={finalGrid.length === 0}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-shuffle" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
                     <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
@@ -166,18 +214,34 @@ function App() {
               </div>
             </div>
             <div className='col-5 p-0'>
-              <div className="input-group mb-3">
-                <button className="btn btn-success w-100" onClick={run} disabled={badCols || badRows}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
-                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                  </svg>
-                  
-                  <span className='mx-1'></span>Run</button>
+              <div className="input-group mb-3 float-end">
+                <button className="btn btn-outline-info w-100" onClick={setup}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-border-all" viewBox="0 0 16 16">
+                  <path d="M0 0h16v16H0V0zm1 1v6.5h6.5V1H1zm7.5 0v6.5H15V1H8.5zM15 8.5H8.5V15H15V8.5zM7.5 15V8.5H1V15h6.5z"/>
+                </svg>
+                <span className='mx-1'></span>Blank</button>
               </div>
             </div>   
           </div>
 
-          <div className='row justify-content-center'>Grid placeholder</div>
+          <div className='gap-3 justify-content-center row'>
+            <div className="input-group mb-3">
+              <button className="btn btn-success w-100" onClick={run} disabled={badCols || badRows || finalGrid.length === 0}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
+                  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                </svg>
+                
+                <span className='mx-1'></span>Run</button>
+            </div>
+          </div>
+
+          <div className='row justify-content-center'>
+            <table id='islandGrid' className='table table-bordered table-dark'>
+              <tbody>
+                {finalGrid}
+              </tbody>
+            </table>
+          </div>
 
         </div>    
 
