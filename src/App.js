@@ -5,6 +5,8 @@ function App() {
 
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
+  const [algo, setAlgo] = useState(Algos.DFS);
+  const [speed, setSpeed] = useState(Speeds.Speed1);
   const [badRows, setBadRows] = useState(true);
   const [badCols, setBadCols] = useState(true);
 
@@ -22,6 +24,7 @@ function App() {
 
   const rowsMax = 10;
   const colsMax = 10;
+  const baseSpeed = 200;
 
   const Algos = Object.freeze({
     DFS:   "DFS",
@@ -70,10 +73,14 @@ function App() {
 
   function handleAlgoChange(ev) {
     console.log("algo changed", ev.target.value);
+    var algo = ev.target.value;
+    setAlgo(algo);
   }
 
   function handleSpeedChange(ev) {
-    console.log("speed changed", ev.target.value);
+    console.log("speed changed", +ev.target.value);
+    var speed = +ev.target.value;
+    setSpeed(speed);
   }
 
   function run() {
