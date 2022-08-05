@@ -5,8 +5,8 @@ function App() {
 
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
-  const [algo, setAlgo] = useState(Algos.DFS);
-  const [speed, setSpeed] = useState(Speeds.Speed1);
+  const [algo, setAlgo] = useState("DFS");
+  const [speed, setSpeed] = useState(1);
   const [badRows, setBadRows] = useState(true);
   const [badCols, setBadCols] = useState(true);
 
