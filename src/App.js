@@ -330,26 +330,28 @@ function App() {
           <div className='gap-3 justify-content-center row pb-3'>
             <div className='col-5 p-0'>
               <div className="btn-group float-start w-100" role="group" aria-label="Basic radio toggle button group" onChange={handleAlgoChange}>
-                <input type="radio" className="btn-check" name="Algo" id="Algo1" autoComplete="off" value={Algos.DFS} defaultChecked/>
-                <label className="btn btn-outline-primary" htmlFor="Algo1">{Algos.DFS}</label>
+                <input type="radio" className="btn-check" name="Algo" id="Algo1" 
+                  autoComplete="off" value={Algos.DFS} defaultChecked/>
+                <label className="btn btn-outline-primary" htmlFor="Algo1" title="Depth First Search">{Algos.DFS}</label>
 
-                <input type="radio" className="btn-check" name="Algo" id="Algo2" autoComplete="off" value={Algos.BFS}/>
-                <label className="btn btn-outline-primary" htmlFor="Algo2">{Algos.BFS}</label>           
+                <input type="radio" className="btn-check" name="Algo" id="Algo2" 
+                  autoComplete="off" value={Algos.BFS} />
+                <label className="btn btn-outline-primary" htmlFor="Algo2" title="Breadth First Search">{Algos.BFS}</label>           
               </div>
             </div>
             <div className='col-5 p-0'>
                 <div className="btn-group float-start w-100" role="group" aria-label="Basic radio toggle button group" onChange={handleSpeedChange}>
                   <input type="radio" className="btn-check" name="RunSpeed" id="RunSpeed1" autoComplete="off" defaultChecked 
                     value={Speeds.Speed1}/>
-                  <label className="btn btn-outline-primary" htmlFor="RunSpeed1">{Speeds.Speed1}x</label>
+                  <label className="btn btn-outline-primary" htmlFor="RunSpeed1" title="1x Speed">{Speeds.Speed1}x</label>
 
                   <input type="radio" className="btn-check" name="RunSpeed" id="RunSpeed2" autoComplete="off" 
                     value={Speeds.Speed2}/>
-                  <label className="btn btn-outline-primary" htmlFor="RunSpeed2">{Speeds.Speed2}x</label>     
+                  <label className="btn btn-outline-primary" htmlFor="RunSpeed2" title="2x Speed">{Speeds.Speed2}x</label>     
 
                   <input type="radio" className="btn-check" name="RunSpeed" id="RunSpeed3" autoComplete="off" 
                     value={Speeds.Speed4}/>
-                  <label className="btn btn-outline-primary" htmlFor="RunSpeed3">{Speeds.Speed4}x</label>    
+                  <label className="btn btn-outline-primary" htmlFor="RunSpeed3" title="4x Speed">{Speeds.Speed4}x</label>    
                 </div>
             </div>
           </div>
@@ -357,7 +359,8 @@ function App() {
           <div className='gap-3 justify-content-center row'>
             <div className='col-5 p-0'>
               <div className="input-group mb-3 float-end">
-                <button className="btn btn-outline-warning w-100" onClick={randomize} disabled={finalGrid.length === 0}>
+                <button className="btn btn-outline-warning w-100" onClick={randomize} 
+                  disabled={finalGrid.length === 0} title="Randomize grid">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-shuffle" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
                     <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
@@ -367,7 +370,8 @@ function App() {
             </div>
             <div className='col-5 p-0'>
               <div className="input-group mb-3 float-end">
-                <button className="btn btn-outline-info w-100" onClick={setBlank} disabled={badCols || badRows}>
+                <button className="btn btn-outline-info w-100" onClick={setBlank} 
+                  disabled={badCols || badRows} title="Set all cells to 0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-border-all" viewBox="0 0 16 16">
                   <path d="M0 0h16v16H0V0zm1 1v6.5h6.5V1H1zm7.5 0v6.5H15V1H8.5zM15 8.5H8.5V15H15V8.5zM7.5 15V8.5H1V15h6.5z"/>
                 </svg>
@@ -378,7 +382,8 @@ function App() {
 
           <div className='gap-3 justify-content-center row'>
             <div className="input-group mb-3">
-              <button className="btn btn-success w-100" onClick={run} disabled={badCols || badRows || finalGrid.length === 0}>
+              <button className="btn btn-success w-100" onClick={run} 
+                disabled={badCols || badRows || finalGrid.length === 0} title="Traverse the grid">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
                   <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                 </svg>
