@@ -253,26 +253,34 @@ function App() {
           <div className='gap-3 justify-content-center row'>            
             <div className='col-5 p-0'>
               <div className="input-group mb-3">
-                <span className="input-group-text" id="Rows">Rows</span>
-                <input id="RowsInput" type="number" className="form-control" min={1} max={10} placeholder="1-10" 
-                  aria-label="Rows" aria-describedby="Rows" onChange={handleRowsChange}/>
-                  { badRows &&
-                    <div className="bad-input-text  fs-6 fst-italic" >
-                      Must be 1-10
-                    </div>
-                  }
+                <label className="input-group-text" htmlFor="RowsInput">Rows</label>
+                <select className="form-select" id="RowsInput" onChange={handleRowsChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>                  
+                </select>
               </div>
             </div>
             <div className='col-5 p-0'>
               <div className="input-group mb-3">
-                <span className="input-group-text" id="Cols">Cols</span>
-                <input id="ColsInput" type="number" className="form-control" min={1} max={10} placeholder="1-10" 
-                  aria-label="Cols" aria-describedby="Cols" onChange={handleColsChange}/>
-                  { badCols &&
-                    <div className="bad-input-text fs-6 fst-italic" >
-                      Must be 1-10
-                    </div>
-                  }
+              <label className="input-group-text" htmlFor="ColsInput">Cols</label>
+                <select className="form-select" id="ColsInput" onChange={handleColsChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>                  
+                </select>
               </div>
             </div>
           </div>
@@ -344,28 +352,10 @@ function App() {
               </tbody>
             </table>
           </div>
-
         </div>    
-
-          {/* Toast that gets shown when bad input values used */}
-          {/* <div id='toastRowsColsError' aria-live="polite" aria-atomic="true" className="bg-dark position-relative toast">
-            <div className="toast-container position-absolute p-3" id="toastPlacement">
-              <div className="toast">
-                <div className="toast-header">
-                  <strong className="me-auto">Error</strong>
-                  <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div className="toast-body text-danger fw-bold">
-                  Please enter rows/cols values between 1-10
-                </div>
-              </div>
-            </div>
-          </div>     */}
       
       </div>
     </div>
-
-
   );
 }
 
