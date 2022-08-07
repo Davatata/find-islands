@@ -217,7 +217,9 @@ function App() {
       var tempRow = [];
 
       for(const [col, v] of value.entries()) {
-        tempRow.push(<td className='gridCell' 
+        let updateClass = 'gridCell '; 
+        updateClass = v === 0 ? '' : 'gray-bg';
+        tempRow.push(<td className={updateClass}
         onClick={() => toggleCell(row,col,v)} key={row+"-"+col}>{v}</td>);
       }
 
@@ -247,9 +249,10 @@ function App() {
         <div className="mx-4 my-2 help-button">
           <button className="btn btn-secondary">?</button>
         </div>
-        <h2>Find Islands</h2>
-        <div className='container form-container'>
 
+        <h1 className="fs-2 fst-italic fw-bold text-uppercase">Find Islands</h1>
+
+        <div className='container form-container mt-5'>
           <div className='gap-3 justify-content-center row'>            
             <div className='col-5 p-0'>
               <div className="input-group mb-3">
@@ -345,14 +348,18 @@ function App() {
             </div>
           </div>
 
+
+        </div>
+
+        <div className='container grid-container'>
           <div className='row justify-content-center'>
-            <table id='islandGrid' className='table table-bordered table-dark'>
-              <tbody>
-                {finalGrid}
-              </tbody>
-            </table>
-          </div>
-        </div>    
+              <table id='islandGrid' className='table table-bordered table-dark'>
+                <tbody>
+                  {finalGrid}
+                </tbody>
+              </table>
+            </div>
+        </div>
       
       </div>
     </div>

@@ -23,6 +23,10 @@
   max-width: 400px !important;
 }
 
+.grid-container {
+  max-width: 600px !important;
+}
+
 .bad-input-text {
   width: 100%;
   margin-top: 0.25rem;
@@ -38,5 +42,15 @@
 
 #islandGrid td:hover {
   cursor: pointer;
-  background-color: #ffc10775;
+  background-color: #ffc10775 !important;
 }
+
+.gray-bg {
+  background-color: #ffffff38 !important;
+}
+
+@media (max-width: 575.98px) { 
+  * {
+    font-size: small !important;
+  }
+ }
