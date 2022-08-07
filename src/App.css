@@ -40,17 +40,21 @@
   -moz-user-select: none; /*Firefox*/
 }
 
-#islandGrid td:hover {
-  cursor: pointer;
-  background-color: #ffc10775 !important;
-}
-
 .gray-bg {
   background-color: #ffffff38 !important;
 }
 
-@media (max-width: 575.98px) { 
+@media (max-width: 575.98px) {
   * {
     font-size: small !important;
   }
- }
+}
+
+@media (min-width: 576px) {
+  #islandGrid td:hover {
+    cursor: pointer;
+    background-color: #ffc10775 !important;
+  }
+}
+
+
