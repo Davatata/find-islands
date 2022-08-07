@@ -49,6 +49,8 @@ function App() {
   const rowsMax = 10;
   const colsMax = 10;
   const baseSpeed = 200;
+  const waterClasses = ['bg-primary'];
+  const landClasses = ['bg-opacity-50', 'bg-warning'];
 
   const Algos = Object.freeze({
     DFS:   "DFS",
@@ -131,6 +133,36 @@ function App() {
 
   function run() {
     console.log("run traversal");
+
+    const matches = document.querySelectorAll("td");
+
+    const cellHolder = [];
+    let tempRow = [];
+
+    // Store all nodes in a 2d array
+    for (let i = 0; i <= matches.length; i++) {
+      if (tempRow.length === cols) {
+        cellHolder.push([...tempRow]);
+        tempRow = [];
+      }
+
+      tempRow.push(matches[i]);
+    }    
+
+    // Iterate all the 0's and 1's and perform traversal
+    // for (let i = 0; i < cellHolder.length; i++) {
+    //   for (let j = 0; j < cellHolder[i].length; j++) {
+    //     if (cellHolder[i][j].textContent === '0') {
+    //       cellHolder[i][j].classList.remove(...landClasses);
+    //       cellHolder[i][j].classList.add(...waterClasses);
+    //     }
+    //     else {
+    //       cellHolder[i][j].classList.remove(...waterClasses);
+    //       cellHolder[i][j].classList.add(...landClasses);
+    //     }
+    //   }
+    // }
+
   }
   
   function randomize() {
@@ -165,6 +197,7 @@ function App() {
   function setup() {
     console.log("pre-setup tempGrid", tempGrid);
 
+    // If grid is empty
     if (tempGrid && tempGrid.length === 0) {
       console.log("grid was empty, filling with 0's");
       for (let i = 0; i < rows; i++) {
@@ -175,6 +208,7 @@ function App() {
       }
     } 
     else {
+      // If user selected a higher number or rows
       if (tempGrid.length < rows) {
         console.log("adding a row to grid");
         while (tempGrid.length < rows) {
@@ -182,6 +216,7 @@ function App() {
           tempGrid.push(colsArray);
         }
       } 
+      // If user selected a lower numbeer of rows
       else if (tempGrid.length > rows) {
         console.log("removing a row from grid");
         while (tempGrid.length > rows) {
@@ -189,6 +224,7 @@ function App() {
         }
       }
 
+      // If user selected a higher number or cols
       if (tempGrid[0].length < cols) {
         console.log("adding a col to grid");
         while (tempGrid[0].length < cols) {
@@ -197,6 +233,7 @@ function App() {
           }
         }
       }
+      // If user selected a lower numbeer of cols
       else if (tempGrid[0].length > cols) {
         console.log("removing a col from grid");
         while (tempGrid[0].length > cols) {
@@ -210,6 +247,9 @@ function App() {
     setupFinalGrid();
   }
 
+  /**
+   * Create the grid of 1's and 0's
+   */
   function setupFinalGrid() {    
     var finalGridTemp = [];
 
@@ -217,10 +257,9 @@ function App() {
       var tempRow = [];
 
       for(const [col, v] of value.entries()) {
-        let updateClass = 'gridCell '; 
-        updateClass = v === 0 ? '' : 'gray-bg';
+        let updateClass = v === 0 ? waterClasses.join(" ") : landClasses.join(" ");
         tempRow.push(<td className={updateClass}
-        onClick={() => toggleCell(row,col,v)} key={row+"-"+col}>{v}</td>);
+          onClick={() => toggleCell(row,col,v)} key={row+"-"+col}>{v}</td>);
       }
 
       finalGridTemp.push(<tr key={row}>{tempRow}</tr>);
