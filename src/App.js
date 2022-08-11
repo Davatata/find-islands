@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
 import queue from "queue";
+import modal from "bootstrap/js/dist/modal"
 
 function App() {
 
@@ -482,7 +483,8 @@ function App() {
     <div className="App">      
       <div className="App-container p-3">
         <div className="mx-4 my-2 help-button">
-          <button className="btn btn-secondary" disabled={isTraversing}>?</button>
+          <button className="btn btn-secondary" disabled={isTraversing} 
+            type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">?</button>
         </div>
 
         <h1 className="fs-2 fst-italic fw-bold text-uppercase">Find Islands</h1>
@@ -620,6 +622,31 @@ function App() {
         {isTraversing && 
           <div>RUNNING...</div>
         }
+
+        {/*  Modal */}
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content fs-5">
+              <div className="modal-header">
+                <h5 className="modal-title text-black" id="exampleModalLabel">How it works</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body text-black text-start">
+                <ol>
+                  <li>Select a <span className='fw-bold'>Rows</span> and <span className='fw-bold'>Cols</span> value.</li>
+                  <li>Pick <span className='fw-bold'>DFS</span> (depth-first search) or <span className='fw-bold'>BFS</span> (breadth-first-search).</li>
+                  <li>Pick the <span className='fw-bold'>Speed</span> (1x, 2x, 4x, 8x) of the traversal.</li>
+                  <li>Click the grid cells to set up islands.</li>
+                    <ul>
+                      <li>(optional) Click <span className='fw-bold'>Random</span> to randomize the grid.</li>
+                      <li>You can also click <span className='fw-bold'>Blank</span> to set all cells to 0.</li>
+                    </ul>
+                  <li>Click <span className='fw-bold'>Run</span> to see the traversal.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
