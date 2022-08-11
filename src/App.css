@@ -44,10 +44,13 @@
   background-color: #ffffff38 !important;
 }
 
+.islandCell {
+  background-color: "yellow";
+}
+
 table[disabled]
 {
   pointer-events: none;
-  opacity: 0.7;
 }
 
 @media (max-width: 575.98px) {
@@ -57,10 +60,20 @@ table[disabled]
 }
 
 @media (min-width: 576px) {
-  #islandGrid td:hover {
+  #islandGrid .cell:hover {
     cursor: pointer;
     background-color: #ffc10775 !important;
   }
 }
 
+.islandAnimation {
+  animation-name: island;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
 
+@keyframes island {
+  0%   {background-color: transparent; opacity: 0}
+  100% {background-color: brown; opacity: 1}
+}
