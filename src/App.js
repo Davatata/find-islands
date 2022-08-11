@@ -16,7 +16,6 @@ function App() {
   
   // Run everytime the rows or cols are changed.
   useEffect(() => {
-    console.log("rows and cols changed", rows, cols);
     if (isColsValid() && isRowsValid()) {      
       setup();
     }
@@ -28,7 +27,6 @@ function App() {
     function initializeValues() {
       document.getElementById("RowsInput").value = rows;
       document.getElementById("ColsInput").value = cols;
-      console.log("initializing values");
     }
 
     // Used to call initalizeValues() only once.
@@ -41,7 +39,6 @@ function App() {
 
   // When tempGrid is modified, call setup so page displays changes.
   useEffect(() => {
-    console.log("tempGrid changed");
     setup();
     
   }, [tempGrid]);
@@ -51,16 +48,11 @@ function App() {
   const baseSpeed = 700;
   const waterClasses = ['cell', 'bg-primary'];
   const landClasses = ['cell', 'bg-opacity-50'];
-  const seenLandClasses = ['cell', 'bg-opacity-50', 'bg-danger'];
   const seenPairs = new Set();
   const cellQueue = [];
   const landBgColor = "saddlebrown";
-  const traversedBgColor = "seagreen";
-  
-  let timeoutID = "resetCellTimeout";
 
-  const animationQueue = queue({ autostart: false, concurrency: 1 });
-  
+  const animationQueue = queue({ autostart: false, concurrency: 1 });  
 
   const Algos = Object.freeze({
     DFS:   "DFS",
@@ -74,19 +66,15 @@ function App() {
     Speed8_0: 8
   });
 
-  function handleRowsChange(ev) {
-    console.log("rows changed", ev.target.value);
+  function handleRowsChange() {
     checkRowValidity();
   }
 
-  function handleColsChange(ev) {
-    console.log("cols changed", ev.target.value);
+  function handleColsChange() {
     checkColValidity();
   }
 
   function checkRowValidity() {
-    console.log("validating rows");
-
     var rowsValue = getInputRows();
 
     if (isRowsValid()) {
@@ -98,7 +86,6 @@ function App() {
   }
 
   function checkColValidity() {
-    console.log("validating cols");
     var colsValue = getInputCols();
     if (isColsValid()) {
       setCols(colsValue);
@@ -114,14 +101,6 @@ function App() {
 
   function getInputCols() {
     return +document.getElementById("ColsInput").value;
-  }
-
-  function getInputSpeed() {
-    return +$('input[name="RunSpeed"]:checked').value;
-  }
-
-  function getInputAlgo() {
-    return $('input[name="Algo"]:checked').value;
   }
 
   function isRowsValid() {
@@ -153,12 +132,9 @@ function App() {
 
     // If no 1's in table, return
     if (onesExist.length === 0) {
-      console.log("No 1's found");
       endRun();
       return;
     }
-
-    console.log("run traversal");
     
     setIsTraversing(true);
 
@@ -184,7 +160,6 @@ function App() {
     }
     
     if (cellQueue.length === 0) {
-      console.log("No 1's found: cellQueue was empty.");
       endRun();
       return;
     }
@@ -218,8 +193,7 @@ function App() {
           }
 
           if(i === elementsToAnimate.length - 1) {            
-            timeoutID = setTimeout(() => {
-              console.log("Reached end of elementsToAnimate");
+            setTimeout(() => {
               endRun();
             }, 1000);
           }
@@ -234,19 +208,15 @@ function App() {
 
 
   function endRun() {
-    console.log("ending run");
     setTimeout(resetCells, 200);
   }
 
   function forceEndRun() {
-    clearTimeout(timeoutID);
-    console.log("force stopping run");
     animationQueue.end();
     setTimeout(resetCells, 0);
   }
   
   function randomize() {
-    console.log("start randomize");
     let grid = [];
 
     for (var i = 0; i < rows; i++) {
@@ -260,7 +230,6 @@ function App() {
   }
 
   function setBlank() {
-    console.log("filling with 0's");
     let grid = [];
 
     for (var i = 0; i < rows; i++) {
@@ -276,7 +245,6 @@ function App() {
   function setup() {
     // If grid is empty
     if (tempGrid && tempGrid.length === 0) {
-      console.log("grid was empty, filling with 0's");
       for (let i = 0; i < rows; i++) {
         tempGrid[i] = [];
         for (let j = 0; j < cols; j++) {
@@ -287,7 +255,6 @@ function App() {
     else {
       // If user selected a higher number or rows
       if (tempGrid.length < rows) {
-        console.log("adding a row to grid");
         while (tempGrid.length < rows) {
           const colsArray = Array(cols).fill(0);
           tempGrid.push(colsArray);
@@ -295,7 +262,6 @@ function App() {
       } 
       // If user selected a lower numbeer of rows
       else if (tempGrid.length > rows) {
-        console.log("removing a row from grid");
         while (tempGrid.length > rows) {
           tempGrid.pop();
         }
@@ -303,7 +269,6 @@ function App() {
 
       // If user selected a higher number or cols
       if (tempGrid[0].length < cols) {
-        console.log("adding a col to grid");
         while (tempGrid[0].length < cols) {
           for (let j = 0; j < tempGrid.length; j++) {
             tempGrid[j].push(0);
@@ -312,7 +277,6 @@ function App() {
       }
       // If user selected a lower numbeer of cols
       else if (tempGrid[0].length > cols) {
-        console.log("removing a col from grid");
         while (tempGrid[0].length > cols) {
           for (let k = 0; k < tempGrid.length; k++) {
             tempGrid[k].pop();
@@ -361,18 +325,6 @@ function App() {
     grid[row][col] = v === 0 ? 1 : 0;
     setTempGrid(grid);
   }
-
-  function setTempGridToSelf() {
-    setTempGrid([...tempGrid]);
-  }
-
-  // function saveGrid(grid) {
-  //   localStorage.setItem("grid", JSON.stringify(grid));
-  // }
-
-  // function getGrid() {
-  //   return JSON.parse(localStorage.getItem("grid"));
-  // }
 
   function traverseGridDFS(cellHolder) {
     for (let i = 0; i < cellHolder.length; i++) {
