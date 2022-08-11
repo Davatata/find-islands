@@ -180,7 +180,7 @@ function App() {
     if (algo === Algos.DFS) {
       traverseGridDFS(cellHolder);
     } else if (algo === Algos.BFS) {
-      console.log("traverse BFS");
+      traverseGridBFS(cellHolder);
     }
     
     if (cellQueue.length === 0) {
@@ -381,6 +381,57 @@ function App() {
           seenPairs.add(stringPair(i,j));
           cellQueue.push([i,j]);
           islandHelperDFS(cellHolder, i, j);          
+        }
+      }
+    }
+  }
+
+  function traverseGridBFS(cellHolder) {
+    for (let i = 0; i < cellHolder.length; i++) {
+      for (let j = 0; j < cellHolder[i].length; j++) {
+        if (cellHolder[i][j].textContent === '1' && !seenPairs.has(stringPair(i,j))) {
+
+          let nextToVisit = [];
+          nextToVisit.push([i,j]);
+
+          while (nextToVisit.length > 0) {
+            let cell = nextToVisit.shift();
+            let x = cell[0];
+            let y = cell[1];
+
+
+            if (seenPairs.has(stringPair(x, y))) { continue; }
+
+            seenPairs.add(stringPair(x, y));
+            cellQueue.push([x, y]);
+
+            // Check above current cell
+            if (isValidPair(x - 1, y)) {
+              if (cellHolder[x - 1][y].textContent === '1' && !seenPairs.has(stringPair(x - 1, y))) {
+                nextToVisit.push([x - 1, y]);
+              }
+            }
+            // Check right of current cell
+            if (isValidPair(x, y + 1)) {
+              if (cellHolder[x][y + 1].textContent === '1' && !seenPairs.has(stringPair(x, y + 1))) {
+                nextToVisit.push([x, y + 1]);
+              }
+            }
+            // Check below current cell
+            if (isValidPair(x + 1, y)) {
+              if (cellHolder[x + 1][y].textContent === '1' && !seenPairs.has(stringPair(x + 1, y))) {
+                nextToVisit.push([x + 1, y]);
+              }
+            }
+            // Check left current cell
+            if (isValidPair(x, y - 1)) {
+              if (cellHolder[x][y - 1].textContent === '1' && !seenPairs.has(stringPair(x, y - 1))) {
+                nextToVisit.push([x, y - 1]);
+              }
+            }
+
+          }
+
         }
       }
     }
@@ -615,7 +666,7 @@ function App() {
         </div>
       
         {isTraversing && 
-          <div>RUNNING</div>
+          <div>RUNNING...</div>
         }
 
       </div>
