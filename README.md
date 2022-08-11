@@ -3,7 +3,10 @@
 
 <p> Example design: </p>
 
+
 ![image](https://user-images.githubusercontent.com/5422375/182937508-61e24771-3985-4f29-acc2-81820b64ebaa.png)
 
 <p> Project URL: <a href="https://find-islands.netlify.app/">https://find-islands.netlify.app/</a>
 
+<p> Final result: </p>
+![image](https://user-images.githubusercontent.com/5422375/184253703-bf1b1550-59ed-45ac-a98b-50964d7fd72c.png)
