@@ -642,6 +642,9 @@ function App() {
                       <li>You can also click <span className='fw-bold'>Blank</span> to set all cells to 0.</li>
                     </ul>
                   <li>Click <span className='fw-bold'>Run</span> to see the traversal.</li>
+                    <ul>
+                      <li>Iteration will run from right to left, and top to bottom.</li>
+                    </ul>
                 </ol>
               </div>
             </div>
