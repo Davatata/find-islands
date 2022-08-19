@@ -7,6 +7,6 @@
 
 <p> Final result: </p>
 
-![image](https://user-images.githubusercontent.com/5422375/184253835-593589c1-275c-4179-a237-43216a722ef6.png)
+<a href="https://find-islands.netlify.app/">![image](https://user-images.githubusercontent.com/5422375/184253835-593589c1-275c-4179-a237-43216a722ef6.png)</a>
 
 <p> Project URL: <a href="https://find-islands.netlify.app/">https://find-islands.netlify.app/</a>
